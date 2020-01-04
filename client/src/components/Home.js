@@ -20,31 +20,32 @@ class Home extends React.Component {
 
   renderVideos = () => {
     const { videos, } = this.state;
-    // if (videos.length <= 0)
-    //   return <h3>No Videos</h3>
+    if (videos.length <= 0)
+      return <h3>No Videos</h3>
     return videos.map( video => ( 
       <>
       {
-        video.id === 1 ? 
-      <Grid.Row>
-        <Item key={video.id}>
-        <Link to={`/videos/${video.id}`} {...video}>
-            <Iframe
-              url={video.trailer}
-              width="450px"
-              height="350px"
-              id={video.id}
-              display="initial"
-              position="relative"
-            >
-            </Iframe>
-            <Header>{ video.title }</Header>
-          
-          </Link>
-        </Item>
+      video.id === 1 ? 
+      <Grid.Row stretched>
+        <Grid.Column width={6}>
+          <Item key={video.id}>
+          <Link to={`/videos/${video.id}`} {...video}>
+          <Header>{ video.title }</Header>
+              <Iframe
+                url={video.trailer}
+                width="450px"
+                height="350px"
+                id={video.id}
+                display="initial"
+                position="relative"
+              >
+              </Iframe>     
+            </Link>
+          </Item>
+        </Grid.Column>
       </Grid.Row> 
         :
-      <Grid.Row>
+        <Grid.Column mobile={16} tablet={8} computer={5} style={{padding: "0 20px"}}>
         <Item 
           key={video.id}
         >
@@ -52,21 +53,18 @@ class Home extends React.Component {
           to={`/videos/${video.id}`}
           {...video}
           >
-          <Header>{ video.title }</Header>
+            <Header>{ video.title }</Header>
             <Iframe
               url={video.trailer}
-              width="250px"
-              height="150px"
               id={video.id}
               display="initial"
               position="relative"
             >
             </Iframe>
-          
           </Link>
         </Item>
-      </Grid.Row> 
-            } 
+        </Grid.Column>
+      } 
   </>
     )
   )}
@@ -78,23 +76,6 @@ class Home extends React.Component {
         <Header as="h1" textAlign="left">All Videos</Header>
         <Grid columns={4}>
           { this.renderVideos() }
-          {/* <Iframe
-              url="http://www.youtube.com/embed/xDMP3i36naA"
-              width="450px"
-              height="450px"
-           
-              display="initial"
-              position="relative"
-            >
-              <Button 
-                icon
-                size="tiny" 
-                onClick={() => this.deleteVideo(video.id)} 
-                style={{ marginLeft: "15px", }}
-              >
-                <Icon name="trash"/>
-              </Button >
-            </Iframe> */}
         </Grid>
       </>
     )
