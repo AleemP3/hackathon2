@@ -18,19 +18,6 @@ class Home extends React.Component {
     })
   }
 
-
-  deleteVideo = (id) => {
-    debugger
-    axios.delete(`/api/videos/${id}`)
-    // .then(res => {
-    //   this.props.history.push("/")
-    // })
-       .then( res => {
-         const { videos, } = this.state;
-       this.setState({ videos: videos.filter(v => v.id !== id), })
-     })
-  }
-
   renderVideos = () => {
     const { videos, } = this.state;
     // if (videos.length <= 0)
@@ -42,13 +29,6 @@ class Home extends React.Component {
       <Grid.Row>
         <Item key={video.id}>
         <Link to={`/videos/${video.id}`} {...video}>
-          {/* <Card.Content>
-            <Card.Header>{ video.title }</Card.Header>
-          </Card.Content>
-          <Card.Content> */}
-            {/* <Button as={Link} to={`/videos/${video.id}`} color='black'>
-              View
-            </Button> */}
             <Iframe
               url={video.trailer}
               width="450px"
@@ -61,28 +41,18 @@ class Home extends React.Component {
             <Header>{ video.title }</Header>
           
           </Link>
-          {/* <Button 
-                icon
-                size="tiny" 
-                onClick={() => this.deleteVideo(video.id)} 
-                style={{ marginLeft: "15px", }}
-              >
-                <Icon name="trash"/>
-              </Button > */}
         </Item>
       </Grid.Row> 
         :
       <Grid.Row>
-        <Item key={video.id}>
-        <Link to={`/videos/${video.id}`}>
-          {/* <Card.Content>
-            <Card.Header>{ video.title }</Card.Header>
-          </Card.Content>
-          <Card.Content> */}
+        <Item 
+          key={video.id}
+        >
+        <Link 
+          to={`/videos/${video.id}`}
+          {...video}
+          >
           <Header>{ video.title }</Header>
-            {/* <Button as={Link} to={`/videos/${video.id}`} color='black'>
-              View
-            </Button> */}
             <Iframe
               url={video.trailer}
               width="250px"
@@ -92,17 +62,8 @@ class Home extends React.Component {
               position="relative"
             >
             </Iframe>
-            
           
           </Link>
-          {/* <Button 
-                icon
-                size="tiny" 
-                onClick={() => this.deleteVideo(video.id)} 
-                style={{ marginLeft: "15px", }}
-              >
-                <Icon name="trash"/>
-              </Button > */}
         </Item>
       </Grid.Row> 
             } 

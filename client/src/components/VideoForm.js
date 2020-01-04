@@ -7,11 +7,9 @@ class VideoForm extends React.Component {
 
   componentDidMount() {
     const { id, } = this.props
-    if (this.props.edit) {
-      axios.get(`/api/${id}`)
-        .then(res => {
-          this.setState({ ...res.data })
-        })
+    // debugger
+    if (id) {
+          this.setState({ ...this.props })
     }
   }
 
@@ -23,17 +21,16 @@ class VideoForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const { id, } = this.props
-    if (this.props.edit) {
+    if (id) {
       axios.put(`/api/videos/${id}`, { ...this.state })
         .then(res => {
-          this.props.updateVideosArray(res.data)
-          // this.props.toggleEdit()
+          debugger
+          // this.props.history.push(`/videos/${id}`)
+          this.props.toggleEdit()
         })
     } else {
       axios.post(`/api/videos`, { ...this.state })
         .then(res => this.props.history.push("/"))
-        // debugger
-      // this.props.toggle()
     }
   }
 

@@ -20,7 +20,7 @@ class Api::VideosController < ApplicationController
   end
 
   def update
-    if current_user.update(video_params)
+    if @video.update(video_params)
       render json: @video
     else
       render json: @video.errors, status: 422
