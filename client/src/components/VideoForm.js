@@ -27,13 +27,13 @@ class VideoForm extends React.Component {
       axios.put(`/api/videos/${id}`, { ...this.state })
         .then(res => {
           this.props.updateVideosArray(res.data)
-          this.props.toggleEdit()
+          // this.props.toggleEdit()
         })
     } else {
       axios.post(`/api/videos`, { ...this.state })
-        .then(res => this.props.addVideo(res.data))
-        debugger
-      this.props.toggle()
+        .then(res => this.props.history.push("/"))
+        // debugger
+      // this.props.toggle()
     }
   }
 
@@ -87,14 +87,14 @@ class VideoForm extends React.Component {
               onChange={this.handleChange}
             />
           </Form.Group>
-          <div style={{ display: 'flex' }}>
-            <Form.Button color='green'>Submit</Form.Button>
-            {/* {this.props.edit ?
+          <Form.Button color='green'>Submit</Form.Button>
+          {/* <div style={{ display: 'flex' }}>
+            {this.props.edit ?
               <Form.Button color='red' onClick={this.props.toggleEdit}>Cancel</Form.Button>
               :
               <Form.Button color='red' onClick={this.props.toggle}>Cancel</Form.Button>
-            } */}
-          </div>
+            }
+          </div> */}
         </Form>
       </div >
     )

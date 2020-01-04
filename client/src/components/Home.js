@@ -18,14 +18,6 @@ class Home extends React.Component {
     })
   }
 
-  addVideo = (name) => {
-    axios.post('/api/videos', { name })
-    .then( res => {
-      const { videos, } = this.state;
-      this.setState({ videos: [...videos, res.data], });
-    })
-  }
-
 
   deletevideo = (id) => {
     axios.delete(`/api/${id}`)
@@ -52,8 +44,8 @@ class Home extends React.Component {
             </Button> */}
             <Iframe
               url={video.trailer}
-              width="450px"
-              height="450px"
+              width="150px"
+              height="150px"
               id={video.id}
               display="initial"
               position="relative"
