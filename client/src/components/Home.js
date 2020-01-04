@@ -1,8 +1,70 @@
-import React from 'react';
-import { Header, } from 'semantic-ui-react';
+import React from "react";
+import axios from "axios";
+import Iframe from 'react-iframe';
+import { Link, } from "react-router-dom";
+import { Card, Icon, Button, Header, Grid} from "semantic-ui-react";
 
-const Home = () => (
-  <Header as="h3" textAlign="center">Devise Auth App</Header>
-);
+
+class Home extends React.Component {
+  state = {videos: []}
+
+  componentDidMount() {
+    axios.get("/api/")
+    .then(res => {
+      this.setState({ videos: res.data })
+    })
+      .catch(err => {
+        console.log(err.response)
+    })
+  }
+
+  deletevideo = (id) => {
+    axios.delete(`/api/${id}`)
+      .then( res => {
+        const { videos, } = this.state;
+        this.setState({ videos: videos.filter(d => d.id !== id), })
+      })
+  }
+
+  renderVideos = () => {
+    const { videos, } = this.state;
+    if (videos.length <= 0)
+      return <h3>No Videos</h3>
+    return videos.map( video => (
+      <Link to={`/${video.id}`}>
+      <Card key={video.id}>
+        <Card.Content>
+          <Card.Header>{ video.name }</Card.Header>
+        </Card.Content>
+        <Card.Content extra>
+          {/* <Button as={Link} to={`/videos/${video.id}`} color='black'>
+            View
+          </Button> */}
+          <Button 
+            icon
+            size="tiny" 
+            onClick={() => this.deleteVideo(video.id)} 
+            style={{ marginLeft: "15px", }}
+          >
+            <Icon name="trash"/>
+          </Button >
+        </Card.Content>
+      </Card>
+      </Link>
+    )
+  )}
+
+  render() {
+
+    return (
+      <>
+        <Header as="h1" textAlign="left">All Videos</Header>
+        <Grid columns={4}>
+          { this.renderVideos() }
+        </Grid>
+      </>
+    )
+  }
+};
 
 export default Home;
