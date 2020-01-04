@@ -9,7 +9,7 @@ class Home extends React.Component {
   state = {videos: []}
 
   componentDidMount() {
-    axios.get("/api/users/:user_id/videos")
+    axios.get("/api/videos")
     .then(res => {
       this.setState({ videos: res.data })
     })
@@ -42,7 +42,7 @@ class Home extends React.Component {
               View
             </Button> */}
             <Iframe
-              url="http://www.youtube.com/embed/xDMP3i36naA"
+              url={video.trailer}
               width="450px"
               height="450px"
               id={video.id}

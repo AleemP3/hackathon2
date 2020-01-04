@@ -89,11 +89,11 @@ class VideoForm extends React.Component {
           </Form.Group>
           <div style={{ display: 'flex' }}>
             <Form.Button color='green'>Submit</Form.Button>
-            {this.props.edit ?
+            {/* {this.props.edit ?
               <Form.Button color='red' onClick={this.props.toggleEdit}>Cancel</Form.Button>
               :
               <Form.Button color='red' onClick={this.props.toggle}>Cancel</Form.Button>
-            }
+            } */}
           </div>
         </Form>
       </div >
