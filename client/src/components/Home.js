@@ -9,7 +9,7 @@ class Home extends React.Component {
   state = {videos: []}
 
   componentDidMount() {
-    axios.get("/api/")
+    axios.get("/api/users/:user_id/videos")
     .then(res => {
       this.setState({ videos: res.data })
     })
@@ -28,8 +28,8 @@ class Home extends React.Component {
 
   renderVideos = () => {
     const { videos, } = this.state;
-    if (videos.length <= 0)
-      return <h3>No Videos</h3>
+    // if (videos.length <= 0)
+    //   return <h3>No Videos</h3>
     return videos.map( video => (
       <Grid.Row>
         <Link to={`/${video.id}`}>
@@ -83,7 +83,7 @@ class Home extends React.Component {
               <Button 
                 icon
                 size="tiny" 
-                // onClick={() => this.deleteVideo(video.id)} 
+                onClick={() => this.deleteVideo(video.id)} 
                 style={{ marginLeft: "15px", }}
               >
                 <Icon name="trash"/>
