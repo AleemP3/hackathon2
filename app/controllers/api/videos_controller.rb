@@ -1,5 +1,6 @@
 class Api::VideosController < ApplicationController
-  before_action :set_product, only: [:show, :update, :destroy]
+  before_action :set_video, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     render json: Video.all
@@ -10,7 +11,7 @@ class Api::VideosController < ApplicationController
   end
 
   def create
-    video = Video.new(product_params)
+    video = Video.new(video_params)
 
     if video.save
       render json: video
@@ -20,7 +21,7 @@ class Api::VideosController < ApplicationController
   end
 
   def update
-    if @video.update(product_params)
+    if @video.update(video_params)
       render json: @video
     else
       render json: @video.errors, status: 422
@@ -32,11 +33,11 @@ class Api::VideosController < ApplicationController
   end
 
   private
-    def set_product
+    def set_video
       @video = Video.find(params[:id])
     end
 
-    def product_params
-      params.require(:video).permit(:name, :description, :price, :department)
+    def video_params
+      params.require(:video).permit(:title, :description, :genre, :trailer)
     end
 end
