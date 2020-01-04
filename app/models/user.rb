@@ -8,4 +8,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
+
+  namespace :api do
+    resources :users do
+      resources :videos
+    end
+
+    resources :videos do
+      resources :comments
+    end
+  end
+
 end
