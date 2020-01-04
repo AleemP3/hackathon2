@@ -80,8 +80,8 @@ class VideoForm extends React.Component {
             />
              <Form.Input
               name="trailer"
-              label="Trailer"
-              placeholder="Trailer"
+              label="Url"
+              placeholder="Url"
               required
               value={trailer}
               onChange={this.handleChange}

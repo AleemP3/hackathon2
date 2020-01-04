@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Iframe from 'react-iframe';
 import { Link, } from "react-router-dom";
-import { Card, Icon, Button, Header, Grid, Item } from "semantic-ui-react";
+import { Card, Icon, Button, Header, Grid, Item} from "semantic-ui-react";
 
 
 class Home extends React.Component {
@@ -22,9 +22,6 @@ class Home extends React.Component {
   deleteVideo = (id) => {
     debugger
     axios.delete(`/api/videos/${id}`)
-    // .then(res => {
-    //   this.props.history.push("/")
-    // })
        .then( res => {
          const { videos, } = this.state;
        this.setState({ videos: videos.filter(v => v.id !== id), })
@@ -33,22 +30,16 @@ class Home extends React.Component {
 
   renderVideos = () => {
     const { videos, } = this.state;
-    // if (videos.length <= 0)
-    //   return <h3>No Videos</h3>
+    if (videos.length <= 0)
+      return <h3>No Videos</h3>
     return videos.map( video => ( 
       <>
       {
         video.id === 1 ? 
-      <Grid.Row>
+      <Grid.Row stretched>
+        <Grid.Column width={6}>
         <Item key={video.id}>
         <Link to={`/videos/${video.id}`} {...video}>
-          {/* <Card.Content>
-            <Card.Header>{ video.title }</Card.Header>
-          </Card.Content>
-          <Card.Content> */}
-            {/* <Button as={Link} to={`/videos/${video.id}`} color='black'>
-              View
-            </Button> */}
             <Iframe
               url={video.trailer}
               width="450px"
@@ -61,28 +52,13 @@ class Home extends React.Component {
             <Header>{ video.title }</Header>
           
           </Link>
-          {/* <Button 
-                icon
-                size="tiny" 
-                onClick={() => this.deleteVideo(video.id)} 
-                style={{ marginLeft: "15px", }}
-              >
-                <Icon name="trash"/>
-              </Button > */}
         </Item>
+        </Grid.Column>
       </Grid.Row> 
         :
-      <Grid.Row>
+        <Grid.Column width={6}>
         <Item key={video.id}>
         <Link to={`/videos/${video.id}`}>
-          {/* <Card.Content>
-            <Card.Header>{ video.title }</Card.Header>
-          </Card.Content>
-          <Card.Content> */}
-          <Header>{ video.title }</Header>
-            {/* <Button as={Link} to={`/videos/${video.id}`} color='black'>
-              View
-            </Button> */}
             <Iframe
               url={video.trailer}
               width="250px"
@@ -92,20 +68,11 @@ class Home extends React.Component {
               position="relative"
             >
             </Iframe>
-            
-          
+            <Header>{ video.title }</Header>
           </Link>
-          {/* <Button 
-                icon
-                size="tiny" 
-                onClick={() => this.deleteVideo(video.id)} 
-                style={{ marginLeft: "15px", }}
-              >
-                <Icon name="trash"/>
-              </Button > */}
         </Item>
-      </Grid.Row> 
-            } 
+        </Grid.Column>
+    } 
   </>
     )
   )}
@@ -114,26 +81,9 @@ class Home extends React.Component {
 
     return (
       <>
-        <Header as="h1" textAlign="left">All Videos</Header>
+        <Header as="h1" textAlign="left" style={{padding: "20px 0"}}>All Videos</Header>
         <Grid columns={4}>
           { this.renderVideos() }
-          {/* <Iframe
-              url="http://www.youtube.com/embed/xDMP3i36naA"
-              width="450px"
-              height="450px"
-           
-              display="initial"
-              position="relative"
-            >
-              <Button 
-                icon
-                size="tiny" 
-                onClick={() => this.deleteVideo(video.id)} 
-                style={{ marginLeft: "15px", }}
-              >
-                <Icon name="trash"/>
-              </Button >
-            </Iframe> */}
         </Grid>
       </>
     )
