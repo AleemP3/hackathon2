@@ -18,6 +18,15 @@ class Home extends React.Component {
     })
   }
 
+  addVideo = (name) => {
+    axios.post('/api/videos', { name })
+    .then( res => {
+      const { videos, } = this.state;
+      this.setState({ videos: [...videos, res.data], });
+    })
+  }
+
+
   deletevideo = (id) => {
     axios.delete(`/api/${id}`)
       .then( res => {
