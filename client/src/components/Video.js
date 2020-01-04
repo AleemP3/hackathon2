@@ -3,13 +3,13 @@ import Iframe from 'react-iframe';
 import { Card, Icon, Button, Header, Grid} from "semantic-ui-react";
 import axios from "axios";
 
-const Video = () => {
+const Video = (props) => {
 
-  const [video, setVideo] = useState([])
+  const [video, setVideo] = useState({})
 
-  useEffect( (data) => {
-    axios.get(`/api/videos/${props.match.params.id}`, data)
-    .then(res => setVideo(...data))
+  useEffect( () => {
+    axios.get(`/api/videos/${props.match.params.video_id}`)
+    .then(res => setVideo(res.data))
   }, [])
 
   

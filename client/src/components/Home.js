@@ -41,7 +41,7 @@ class Home extends React.Component {
         video.id === 1 ? 
       <Grid.Row>
         <Item key={video.id}>
-        <Link to={`/api/videos/${video.id}`}>
+        <Link to={`/videos/${video.id}`} {...video}>
           {/* <Card.Content>
             <Card.Header>{ video.title }</Card.Header>
           </Card.Content>
@@ -74,7 +74,7 @@ class Home extends React.Component {
         :
       <Grid.Row>
         <Item key={video.id}>
-        <Link to={`/api/videos/${video.id}`}>
+        <Link to={`/videos/${video.id}`}>
           {/* <Card.Content>
             <Card.Header>{ video.title }</Card.Header>
           </Card.Content>
