@@ -1,4 +1,4 @@
-class Api::CommentsController < videoController
+class Api::CommentsController < ApplicationController
   before_action :set_video
   before_action :set_comment, only: [:show, :update, :destroy]
 
@@ -11,19 +11,19 @@ class Api::CommentsController < videoController
   end
 
   def create
-    comment = @video.comments.new(comment_params)
+    @comment = @video.comments.new(comment_params)
 
-    if comment.save
-      render json: comment
+    if @comment.save
+      render json: @comment
     else
-      render json: comment.errors, status: 422
+      render json: @comment.errors, status: 422
     end
 
   end
 
   def update
 
-    if @comment.update(comment_params)
+    if @video.comments.update(comment_params)
       render json: @comment
     else
       render json: @comment.errors, status: 422
@@ -38,7 +38,7 @@ class Api::CommentsController < videoController
   private
 
     def set_video
-      @video = current_user.videos.find(params[:video_id])
+      @video = Video.find(params[:video_id])
     end
 
     def set_comment
