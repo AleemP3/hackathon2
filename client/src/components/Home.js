@@ -31,26 +31,37 @@ class Home extends React.Component {
     if (videos.length <= 0)
       return <h3>No Videos</h3>
     return videos.map( video => (
-      <Link to={`/${video.id}`}>
-      <Card key={video.id}>
-        <Card.Content>
-          <Card.Header>{ video.name }</Card.Header>
-        </Card.Content>
-        <Card.Content extra>
-          {/* <Button as={Link} to={`/videos/${video.id}`} color='black'>
-            View
-          </Button> */}
-          <Button 
-            icon
-            size="tiny" 
-            onClick={() => this.deleteVideo(video.id)} 
-            style={{ marginLeft: "15px", }}
-          >
-            <Icon name="trash"/>
-          </Button >
-        </Card.Content>
-      </Card>
-      </Link>
+      <Grid.Row>
+        <Link to={`/${video.id}`}>
+        {/* <Card key={video.id}> */}
+          {/* <Card.Content>
+            <Card.Header>{ video.name }</Card.Header>
+          </Card.Content>
+          <Card.Content extra> */}
+            {/* <Button as={Link} to={`/videos/${video.id}`} color='black'>
+              View
+            </Button> */}
+            <Iframe
+              url="http://www.youtube.com/embed/xDMP3i36naA"
+              width="450px"
+              height="450px"
+              id={video.id}
+              display="initial"
+              position="relative"
+            >
+              <Button 
+                icon
+                size="tiny" 
+                onClick={() => this.deleteVideo(video.id)} 
+                style={{ marginLeft: "15px", }}
+              >
+                <Icon name="trash"/>
+              </Button >
+            </Iframe>
+          {/* </Card.Content>
+        </Card> */}
+        </Link>
+      </Grid.Row>
     )
   )}
 
@@ -61,6 +72,23 @@ class Home extends React.Component {
         <Header as="h1" textAlign="left">All Videos</Header>
         <Grid columns={4}>
           { this.renderVideos() }
+          {/* <Iframe
+              url="http://www.youtube.com/embed/xDMP3i36naA"
+              width="450px"
+              height="450px"
+           
+              display="initial"
+              position="relative"
+            >
+              <Button 
+                icon
+                size="tiny" 
+                // onClick={() => this.deleteVideo(video.id)} 
+                style={{ marginLeft: "15px", }}
+              >
+                <Icon name="trash"/>
+              </Button >
+            </Iframe> */}
         </Grid>
       </>
     )
