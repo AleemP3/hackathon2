@@ -46,7 +46,7 @@ class Api::CommentsController < videoController
     end
 
     def comment_params
-      params.require(:comment).permit(:date, :time, :thank_you, :follow_up, :notes, :type)
+      params.require(:comment).permit(:author, :body, :date)
     end
 
 end
