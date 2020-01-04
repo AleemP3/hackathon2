@@ -1,23 +1,22 @@
 import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Menu, Grid, Dropdown, Image} from 'semantic-ui-react'
+import { Menu, Grid, Dropdown, Image, Button} from 'semantic-ui-react'
 import { Link, withRouter, } from 'react-router-dom'
 import logo from "../images/logo.png"
 import userImage from "../images/user.png"
 
-class Navbar extends React.Component {
-
-  state = { toggleUser: false }
+const Navbar = (props) => {
 
 
-  clickUser = () => {
-    this.setState({ toggleUser: !this.state.toggleUser}); 
-  }
 
-  rightNavItems = () => {
-    const { auth: { user, handleLogout, }, location, } = this.props;
+  // const clickUser = () => {
+  //   this.setState({ toggleUser: !this.state.toggleUser}); 
+  // }
 
-    if (user) {
+  const rightNavItems = (auth) => {
+    // const  { location } = props;
+
+    if (auth.user) {
       return (
         <>
         <Menu.Menu vertical position='right'>
@@ -36,63 +35,51 @@ class Navbar extends React.Component {
                 </Menu>
                 </>
                 : */}
-                <Menu.Item onClick={() => handleLogout(this.props.history)}>
+                <Menu.Item onClick={() => auth.handleLogout(props.history)}>
                   <Image src={userImage} width={50} height={40}/>
                 </Menu.Item>
+                <Menu.Item><Link to="/videos/new"><Button>Add Videos</Button></Link></Menu.Item>
               {/* } */}
             </Grid.Row>
           </Grid>
         </Menu.Menu>
         </>
       )
-    } else {
+    }  else {
       return (
-        <Menu.Menu position='right'>
-          <Link to='/login'>
-            <Menu.Item
-              id='login'
-              name='login'
-              active={location.pathname === '/login'}
+        <Menu.Menu position="right">
+          <Link to="/login">
+            <Menu.Item name="login"
+            active={props.location.pathname === "/login"}
             />
           </Link>
-          <Link to='/register'>
-            <Menu.Item
-              id='register'
-              name='register'
-              active={location.pathname === '/register'}
+          <Link to="/register">
+            <Menu.Item name="register"
+            active={props.location.pathname === "/register"}
             />
           </Link>
         </Menu.Menu>
       )
     }
-  }
+  };
 
-  render() {
     return (
       <div>
-        <Grid.Row>
-          <Menu pointing secondary>
-            <Link to='/'>
-              <Menu.Item icon><Image src={logo} width={100} height={40}/></Menu.Item>
-            </Link>
-            { this.rightNavItems() }
-          </Menu>
-        </Grid.Row>
+        <AuthConsumer>
+          { auth =>
+          <Grid.Row>
+            <Menu pointing secondary>
+              <Link to='/'>
+                <Menu.Item icon><Image src={logo} width={100} height={40}/></Menu.Item>
+              </Link>
+              { rightNavItems(auth) }
+            </Menu>
+          </Grid.Row>
+          }
+        </AuthConsumer>
       </div>
     );
   };
-};
 
-export class ConnectedNavbar extends React.Component {
-  render() {
-    return (
-      <AuthConsumer>
-        { auth =>
-          <Navbar {...this.props} auth={auth} />
-        }
-      </AuthConsumer>
-    );
-  };
-};
 
-export default withRouter(ConnectedNavbar);
+export default withRouter(Navbar);
