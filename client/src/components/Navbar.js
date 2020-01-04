@@ -42,7 +42,7 @@ class Navbar extends React.Component {
   render() {
     return (
       <div>
-        <Menu pointing secondary>
+        <Menu pointing secondary vertical>
           <Link to='/'>
             <Menu.Item
               name='home'
