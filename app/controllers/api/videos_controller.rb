@@ -7,7 +7,7 @@ class Api::VideosController < ApplicationController
   end
 
   def show
-    render json: @video
+    render json: @video 
   end
 
   def create
@@ -33,7 +33,7 @@ class Api::VideosController < ApplicationController
 
   private
     def set_video
-      @video = current_user.video.find(params[:id])
+      @video = Video.find(params[:id])
     end
 
     def video_params
