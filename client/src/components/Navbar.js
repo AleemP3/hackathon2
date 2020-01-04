@@ -19,7 +19,7 @@ const Navbar = (props) => {
     if (auth.user) {
       return (
         <>
-        <Menu.Menu vertical position='right'>
+        <Menu.Menu position='right'>
           <Grid>
             <Grid.Row>
               {/* { this.state.toggleUser ? 
