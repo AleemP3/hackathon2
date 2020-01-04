@@ -9,3 +9,10 @@
 
 
 
+Video.create(
+      title: 'Angel Olsen - Shut Up Kiss Me',
+      duration: '4:00',
+      genre: 'music',
+      description: 'music video',
+      trailer: 'https://www.youtube.com/embed/nleRCBhLr3k'
+)
